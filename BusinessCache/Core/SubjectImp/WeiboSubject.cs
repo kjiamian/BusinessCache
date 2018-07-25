@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BusinessCache.Core.SubjectImp
 {
-    public class WeiboSubject
+    public class WeiboSubject : ISubject
     {
         /// <summary>
         /// 声明委托
@@ -48,5 +48,6 @@ namespace BusinessCache.Core.SubjectImp
             NotifyEvent?.Invoke(this, args);
         }
 
+        public string EntityName { get; set; } = "Weibo";
     }
 }

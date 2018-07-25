@@ -9,22 +9,29 @@ namespace BusinessCache.Core
 {
     public class CacheManager
     {
+        public List<ISubject> subjects = new List<ISubject>();
         public CacheManager()
         {
             //todo:通过配置，处理订阅关系
-            var subject = new WeiboSubject();
+            var weiboSubject = new WeiboSubject();
 
             var userInfoCacheObserver = new UserInfoCacheObserver();
             var weiboCacheObserver = new WeiboCacheObserver();
 
-            subject.NotifyEvent += userInfoCacheObserver.Receive;
-            subject.NotifyEvent += weiboCacheObserver.Receive;
-
-            subject.Notify(new Dictionary<string, string>()
-            {
-                { "UserId", "1" }
-            });
-
+            weiboSubject.NotifyEvent += userInfoCacheObserver.Receive;
+            weiboSubject.NotifyEvent += weiboCacheObserver.Receive;
+            
+            subjects.Add(weiboSubject);
         }
+
+        public void Notify(string entityName, Dictionary<string, string> param)
+        {
+            var items = subjects.Where(p => p.EntityName == entityName);
+            foreach (var subject in items)
+            {
+                subject.Notify(param);
+            }
+        }
+
     }
 }

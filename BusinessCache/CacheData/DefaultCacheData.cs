@@ -32,7 +32,7 @@ namespace BusinessCache.CacheData
             UserCaches.AddRange(userInfos.Select(p => ConverToUserCache(p, userLikeRecords)));
         }
 
-        private static UserCache ConverToUserCache(UserInfo model, IEnumerable<UserLikeRecord> userLikeRecords)
+        public static UserCache ConverToUserCache(UserInfo model, IEnumerable<UserLikeRecord> userLikeRecords)
         {
             var records = userLikeRecords.Where(p => p.UserId == model.Id);
             return new UserCache()
@@ -58,7 +58,12 @@ namespace BusinessCache.CacheData
         {
             var weibos = DefaultData.Weibos;
             WeiboCaches.Clear();
-            WeiboCaches.AddRange(weibos.Select(p => new WeiboCache() { Id = p.Id, LikeCount = p.LikeCount }));
+            WeiboCaches.AddRange(weibos.Select(ConvertToWeiboCache));
+        }
+
+        public static WeiboCache ConvertToWeiboCache(Weibo model)
+        {
+            return new WeiboCache() { Id = model.Id, LikeCount = model.LikeCount };
         }
     }
 }

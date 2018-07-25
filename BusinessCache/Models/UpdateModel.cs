@@ -7,6 +7,7 @@ namespace BusinessCache.Models
     /// </summary>
     public class UpdateModel
     {
-        private Dictionary<string, string> Param { get; set; }
+        public string EntityName { get; set; }
+        public Dictionary<string, string> Param { get; set; }
     }
 }
