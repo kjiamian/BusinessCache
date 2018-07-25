@@ -1,4 +1,5 @@
-﻿using BusinessCache.Models;
+﻿using BusinessCache.Core;
+using BusinessCache.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessCache.Controllers
@@ -10,11 +11,11 @@ namespace BusinessCache.Controllers
         /// <summary>
         /// 更新缓存
         /// </summary>
-        /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Put(int id, [FromBody] UpdateModel model)
+        public bool Put([FromBody] UpdateModel model)
         {
+            new CacheManager();
             return true;
         }
 

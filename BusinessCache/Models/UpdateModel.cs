@@ -1,13 +1,12 @@
-﻿namespace BusinessCache.Models
+﻿using System.Collections.Generic;
+
+namespace BusinessCache.Models
 {
     /// <summary>
     /// 更新模板
     /// </summary>
     public class UpdateModel
     {
-        /// <summary>
-        /// 实体名称
-        /// </summary>
-        public string EntityName { get; set; }
+        private Dictionary<string, string> Param { get; set; }
     }
 }
