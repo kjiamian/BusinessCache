@@ -1,0 +1,6 @@
+﻿# csharp
+bin
+obj
+/.vs/LiuYue.YueSeZhenMei/v15
+/.vs/LiuYue.YueSeZhenMei/DesignTimeBuild
+/LiuYue.YueSeZhenMei.WebAPI/Log
