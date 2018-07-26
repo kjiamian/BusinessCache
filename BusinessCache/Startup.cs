@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using BusinessCache.Core;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace BusinessCache
 {
@@ -19,6 +21,15 @@ namespace BusinessCache
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSwaggerGen(options =>
+                {
+                    options.SwaggerDoc("v1", new Info
+                    {
+                        Version = "v1",
+                        Title = "WebApi"
+                    });
+                });
+            services.AddSingleton<CacheManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,7 +39,12 @@ namespace BusinessCache
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi V1");
+                c.DocExpansion(DocExpansion.List);
+            });
             app.UseMvc();
         }
     }

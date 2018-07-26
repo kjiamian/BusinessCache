@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinessCache.CacheModels
+namespace BusinessCache.TestData.CacheModels
 {
     public class UserCache
     {

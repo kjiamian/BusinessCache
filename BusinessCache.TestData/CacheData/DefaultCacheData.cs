@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BusinessCache.CacheModels;
-using BusinessCache.Data;
-using BusinessCache.Entities;
+using BusinessCache.TestData.CacheModels;
+using BusinessCache.TestData.Data;
+using BusinessCache.TestData.Entities;
 
-namespace BusinessCache.CacheData
+namespace BusinessCache.TestData.CacheData
 {
     public static class DefaultCacheData
     {

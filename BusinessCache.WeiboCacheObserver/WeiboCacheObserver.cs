@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using BusinessCache.CacheData;
-using BusinessCache.Data;
+using BusinessCache.Common;
+using BusinessCache.Core;
+using BusinessCache.TestData.CacheData;
+using BusinessCache.TestData.Data;
 
-namespace BusinessCache.Core.IObserverImp
+namespace BusinessCache.WeiboCacheObserver
 {
     public class WeiboCacheObserver : IObserver
     {
+        public string ObserverName { get; set; } = KeyMap.ObserverWeiboCache;
         public void Receive(object sender, NotifyEventArgs e)
         {
             var weiboId = Convert.ToInt32(e.Data["WeiboId"]);

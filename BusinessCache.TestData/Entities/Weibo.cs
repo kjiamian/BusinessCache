@@ -1,4 +1,4 @@
-﻿namespace BusinessCache.Entities
+﻿namespace BusinessCache.TestData.Entities
 {
     public class Weibo
     {

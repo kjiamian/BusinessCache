@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessCache.Common\BusinessCache.Common.csproj" />
+    <ProjectReference Include="..\BusinessCache.Core\BusinessCache.Core.csproj" />
+  </ItemGroup>
+
+</Project>

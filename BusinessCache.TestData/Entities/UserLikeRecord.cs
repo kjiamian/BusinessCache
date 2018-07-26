@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessCache.Entities
+namespace BusinessCache.TestData.Entities
 {
     public class UserLikeRecord
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessCache.Entities;
+using BusinessCache.TestData.Entities;
 
-namespace BusinessCache.Data
+namespace BusinessCache.TestData.Data
 {
     //默认使用静态数据
     public static class DefaultData
