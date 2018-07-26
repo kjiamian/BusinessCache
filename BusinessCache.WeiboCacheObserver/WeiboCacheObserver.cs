@@ -12,7 +12,7 @@ namespace BusinessCache.WeiboCacheObserver
         public string ObserverName { get; set; } = KeyMap.ObserverWeiboCache;
         public void Receive(object sender, NotifyEventArgs e)
         {
-            var weiboId = Convert.ToInt32(e.Data["WeiboId"]);
+            var weiboId = e.Data.GetValue("WeiboId")?.ToInt32() ?? 0;
             var weiboCache = DefaultCacheData.WeiboCaches.FirstOrDefault(p => p.Id == weiboId);
             if (weiboCache != null)
             {

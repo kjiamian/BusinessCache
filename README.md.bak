@@ -1,0 +1,6 @@
+Business Cache Manager
+
+Copy BusinessCache.WeiboSubject.dll to Subject folder
+
+Copy BusinessCache.UserInfoCacheObserver.dll to Subject folder
+Copy BusinessCache.WeiboCacheObserver.dll to Subject folder

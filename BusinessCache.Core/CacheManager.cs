@@ -68,20 +68,16 @@ namespace BusinessCache.Core
             string[] array = files;
             foreach (string text in array)
             {
-                FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(text);
-                if (versionInfo.Comments.Equals("Extension", StringComparison.OrdinalIgnoreCase))
+                Assembly assembly = Assembly.LoadFrom(text);
+                Type[] types = assembly.GetTypes();
+                foreach (Type type in types)
                 {
-                    Assembly assembly = Assembly.LoadFrom(text);
-                    Type[] types = assembly.GetTypes();
-                    foreach (Type type in types)
+                    if (!isTypeMethod(type))
                     {
-                        if (!isTypeMethod(type))
-                        {
-                            continue;
-                        }
-                        T value = (T)((object)Activator.CreateInstance(type));
-                        cacheDict.Add(getKey(value), value);
+                        continue;
                     }
+                    T value = (T)((object)Activator.CreateInstance(type));
+                    cacheDict.Add(getKey(value), value);
                 }
             }
         }

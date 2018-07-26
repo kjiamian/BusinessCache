@@ -1,4 +1,5 @@
 ﻿using BusinessCache.Core;
+using BusinessCache.TestData.CacheData;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +47,7 @@ namespace BusinessCache
                 c.DocExpansion(DocExpansion.List);
             });
             app.UseMvc();
+            DefaultCacheData.InitCache();
         }
     }
 }

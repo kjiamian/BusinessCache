@@ -13,7 +13,7 @@ namespace BusinessCache.UserInfoCacheObserver
 
         public void Receive(object sender, NotifyEventArgs e)
         {
-            var userId = Convert.ToInt32(e.Data["UserId"]);
+            var userId = e.Data.GetValue("UserId")?.ToInt32() ?? 0; 
             var userCache = DefaultCacheData.UserCaches.FirstOrDefault(p => p.Id == userId);
             if (userCache != null)
             {

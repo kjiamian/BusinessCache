@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using BusinessCache.Common;
 using BusinessCache.Core;
 using BusinessCache.Models;
 using BusinessCache.TestData.Data;
@@ -24,6 +25,9 @@ namespace BusinessCache.Controllers
         [HttpPut]
         public bool Put([FromBody] UpdateModel model)
         {
+            model.EntityName = KeyMap.EntityNameWeibo;
+            model.Param.Add("UserId","1");
+            model.Param.Add("WeiboId", "11");
             DefaultData.Weibos.FirstOrDefault(p => p.Id == 11).LikeCount += 1;
             DefaultData.UserLikeRecords.FirstOrDefault(p => p.UserId == 1 && p.WeiboId == 11).LikeCount += 1;
             _cacheManager.Notify(model.EntityName, model.Param);
