@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using BusinessCache.Common;
+using BusinessCache.Core.Models;
 using BusinessCache.TestData.Entities;
 
 namespace BusinessCache.TestData.Data
@@ -24,6 +26,19 @@ namespace BusinessCache.TestData.Data
         public static List<UserLikeRecord> UserLikeRecords = new List<UserLikeRecord>()
         {
             new UserLikeRecord(){Id =  1,UserId = 1,WeiboId = 11, LikeCount = 10, CreateTime = new DateTime(2018,07,24), UpdateTime = new DateTime(2018,07,24)}
+        };
+
+        public static List<SubscriptionRelationship> SubscriptionRelationships = new List<SubscriptionRelationship>()
+        {
+            new SubscriptionRelationship()
+            {
+                SubjectEntityName = KeyMap.SubjectNameWeibo,
+                ObserverNames = new List<string>()
+                {
+                    KeyMap.ObserverWeiboCache,
+                    KeyMap.ObserverUserInfoCache
+                }
+            }
         };
     }
 }

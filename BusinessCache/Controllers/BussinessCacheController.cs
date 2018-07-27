@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using BusinessCache.Common;
 using BusinessCache.Core;
 using BusinessCache.Models;
+using BusinessCache.TestData.CacheData;
 using BusinessCache.TestData.Data;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BusinessCache.Controllers
 {
@@ -23,15 +26,19 @@ namespace BusinessCache.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut]
-        public bool Put([FromBody] UpdateModel model)
+        public string Put([FromBody] UpdateModel model)
         {
-            model.EntityName = KeyMap.EntityNameWeibo;
-            model.Param.Add("UserId","1");
+            model.EntityName = KeyMap.SubjectNameWeibo;
+            model.Param.Add("UserId", "1");
             model.Param.Add("WeiboId", "11");
             DefaultData.Weibos.FirstOrDefault(p => p.Id == 11).LikeCount += 1;
             DefaultData.UserLikeRecords.FirstOrDefault(p => p.UserId == 1 && p.WeiboId == 11).LikeCount += 1;
             _cacheManager.Notify(model.EntityName, model.Param);
-            return true;
+
+
+            var weiboCacheStr = JsonConvert.SerializeObject(DefaultCacheData.WeiboCaches, Formatting.Indented);
+            var userCacheStr = JsonConvert.SerializeObject(DefaultCacheData.UserCaches, Formatting.Indented);
+            return weiboCacheStr + Environment.NewLine + userCacheStr;
         }
 
     }

@@ -1,5 +1,7 @@
 ﻿using BusinessCache.Core;
+using BusinessCache.Core.Store;
 using BusinessCache.TestData.CacheData;
+using BusinessCache.TestData.Store;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +33,7 @@ namespace BusinessCache
                     });
                 });
             services.AddSingleton<CacheManager>();
+            services.AddSingleton<ISubscriptionRelationshipStore, SubscriptionRelationshipStroe>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessCache.Core\BusinessCache.Core.csproj" />
+  </ItemGroup>
+
 </Project>

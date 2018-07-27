@@ -2,7 +2,7 @@
 {
     public class KeyMap
     {
-        public const string EntityNameWeibo = "Weibo";
+        public const string SubjectNameWeibo = "Weibo";
 
 
         public const string ObserverUserInfoCache = "UserInfoCache";

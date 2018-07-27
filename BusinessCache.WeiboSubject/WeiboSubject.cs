@@ -6,7 +6,7 @@ namespace BusinessCache.WeiboSubject
 {
     public class WeiboSubject : ISubject
     {
-        public string EntityName { get; set; } = KeyMap.EntityNameWeibo;
+        public string SubjectName { get; set; } = KeyMap.SubjectNameWeibo;
         /// <summary>
         /// 声明委托
         /// </summary>

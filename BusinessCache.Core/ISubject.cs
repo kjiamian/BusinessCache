@@ -8,7 +8,7 @@ namespace BusinessCache.Core
         /// <summary>
         /// <see cref="KeyMap"/>
         /// </summary>
-        string EntityName { get; set; }
+        string SubjectName { get; set; }
 
         /// <summary>
         /// 发布博客通知

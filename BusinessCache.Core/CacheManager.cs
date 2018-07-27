@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using BusinessCache.Common;
+using BusinessCache.Core.Store;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace BusinessCache.Core
@@ -14,22 +15,31 @@ namespace BusinessCache.Core
     {
         private Dictionary<string, ISubject> _subjects = new Dictionary<string, ISubject>();
         private Dictionary<string, IObserver> _observers = new Dictionary<string, IObserver>();
-        public CacheManager()
+        public CacheManager(ISubscriptionRelationshipStore relationshipStore)
         {
             string path = PlatformServices.Default.Application.ApplicationBasePath;
-            ExtUtility.WriteObjectToCache(Path.Combine(path, "Subject"), _subjects, subject => subject.EntityName);
+            ExtUtility.WriteObjectToCache(Path.Combine(path, "Subject"), _subjects, subject => subject.SubjectName);
             ExtUtility.WriteObjectToCache(Path.Combine(path, "Observer"), _observers, observer => observer.ObserverName);
 
-            //反射实例化ISubject，IObserver 的实现
-            var weiboSubject = _subjects[KeyMap.EntityNameWeibo];
-
-            var userInfoCacheObserver = _observers[KeyMap.ObserverUserInfoCache];
-            var weiboCacheObserver = _observers[KeyMap.ObserverWeiboCache];
-
-
-            weiboSubject.AddObserver(userInfoCacheObserver);
-            weiboSubject.AddObserver(weiboCacheObserver);
-
+            var relatinShipes = relationshipStore.GetAllRelationships();
+            foreach (var subscriptionRelationship in relatinShipes)
+            {
+                if (!_subjects.ContainsKey(subscriptionRelationship.SubjectEntityName))
+                {
+                    //todo:输出错误日志
+                    continue;
+                }
+                var subject = _subjects[subscriptionRelationship.SubjectEntityName];
+                foreach (var observerName in subscriptionRelationship.ObserverNames)
+                {
+                    if (!_observers.ContainsKey(observerName))
+                    {
+                        //todo:输出错误日志
+                        continue;
+                    }
+                    subject.AddObserver(_observers[observerName]);
+                }
+            }
         }
 
         public void Notify(string entityName, Dictionary<string, string> param)
